@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Typhoon Agency — Portfolio</title>
+  <style>
+    /* --------------------
+       Basic Reset
+       -------------------- */
+    :root{
+      --bg:#0f1724; /* deep navy */
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#38bdf8; /* skyblue */
+      --accent-2:#7c3aed; /* violet */
+      --glass: rgba(255,255,255,0.03);
+      --glass-2: rgba(255,255,255,0.02);
+      --radius: 14px;
+      --maxw:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg,var(--bg) 0%, #071225 100%);
+      color:#e6eef6;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      padding:32px 20px;
+      display:flex;
+      justify-content:center;
+    }
+
+    .wrap{width:100%;max-width:var(--maxw);} 
+
+    /* --------------------
+       Header / Nav
+       -------------------- */
+    header{
+      display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:28px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#022;
+      transform:rotate(-8deg);
+      box-shadow:0 8px 20px rgba(124,58,237,0.12), 0 2px 6px rgba(0,0,0,0.6);
+    }
+    nav{display:flex;gap:12px;align-items:center}
+    nav a{color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-weight:600}
+    nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));transform:translateY(-2px)}
+
+    /* CTA */
+    .cta{background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:8px 14px;border-radius:12px;color:#052; font-weight:700}
+
+    /* --------------------
+       Hero
+       -------------------- */
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:36px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      padding:28px;border-radius:var(--radius);box-shadow:0 8px 30px rgba(2,6,23,0.6);
+      overflow:hidden;
+    }
+    .hero-left h1{font-size:clamp(28px,4.6vw,44px);margin:0 0 8px}
+    .hero-left p{color:var(--muted);margin:0 0 18px}
+    .hero-cta{display:flex;gap:12px}
+    .btn{background:var(--accent);color:#022;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn-ghost{border:1px solid rgba(255,255,255,0.06);padding:10px 12px;border-radius:10px;color:var(--muted);text-decoration:none}
+
+    /* floating card on right */
+    .card{
+      background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
+      border-radius:12px;padding:18px;box-shadow:0 10px 30px rgba(2,6,23,0.6);transform:translateY(0);transition:transform .45s cubic-bezier(.2,.9,.3,1);
+    }
+    .card:hover{transform:translateY(-6px) rotate(-1deg) scale(1.01)}
+
+    /* --------------------
+       Features / Services (flex)
+       -------------------- */
+    .services{display:flex;gap:14px;margin:26px 0 36px}
+    .service{flex:1;padding:14px;border-radius:12px;background:var(--glass);backdrop-filter:blur(6px);min-width:0}
+    .service h4{margin:0 0 8px}
+    .service p{margin:0;color:var(--muted);font-size:14px}
+
+    /* --------------------
+       Portfolio grid
+       -------------------- */
+    .portfolio{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+    .proj{position:relative;border-radius:12px;overflow:hidden;min-height:140px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.2));border:1px solid rgba(255,255,255,0.03);transition:transform .35s ease, box-shadow .35s ease}
+    .proj img{width:100%;height:100%;object-fit:cover;display:block}
+    .proj:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 12px 40px rgba(2,6,23,0.6)}
+    .proj-badge{position:absolute;left:12px;bottom:12px;padding:8px 10px;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#022;font-weight:700}
+
+    /* --------------------
+       Team grid (use CSS grid)
+       -------------------- */
+    .team{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px}
+    .member{background:var(--glass-2);padding:14px;border-radius:12px;text-align:center;transition:transform .35s ease}
+    .member:hover{transform:translateY(-8px) rotate(-1deg)}
+    .avatar{width:84px;height:84px;margin:0 auto;border-radius:18px;display:flex;align-items:center;justify-content:center;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent-2));color:#022;margin-bottom:12px}
+    .role{color:var(--muted);font-size:13px;margin-top:6px}
+
+    /* --------------------
+       Contact / Footer
+       -------------------- */
+    .contact{display:grid;grid-template-columns:1fr 300px;gap:18px;padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent)}
+    .input{display:flex;gap:8px;flex-direction:column}
+    input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:inherit;outline:none}
+    textarea{min-height:120px}
+
+    footer{margin-top:22px;color:var(--muted);font-size:13px;text-align:center}
+
+    /* --------------------
+       Responsive
+       -------------------- */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .portfolio{grid-template-columns:repeat(2,1fr)}
+      .team{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+    }
+    @media (max-width:520px){
+      header{flex-direction:column;align-items:flex-start}
+      nav{flex-wrap:wrap}
+      .portfolio{grid-template-columns:1fr}
+      .team{grid-template-columns:1fr}
+    }
+
+    /* --------------------
+       Small animations (keyframes)
+       -------------------- */
+    @keyframes floatUp{
+      0%{transform:translateY(6px)}
+      50%{transform:translateY(-6px)}
+      100%{transform:translateY(6px)}
+    }
+    .float{animation:floatUp 6s ease-in-out infinite}
+
+    /* subtle entrance */
+    .reveal{opacity:0;transform:translateY(10px);animation:reveal .6s forwards}
+    @keyframes reveal{to{opacity:1;transform:none}}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">T</div>
+        <div>
+          <div style="font-weight:700">Typhoon Agency</div>
+          <div style="font-size:12px;color:var(--muted)">Design • Frontend • Backend • Projects</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="#team">Team</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="#contact">Hire Us</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero reveal" style="animation-delay:.05s">
+        <div class="hero-left">
+          <h1>We build fast, beautiful websites — and ship projects that scale.</h1>
+          <p>Leader &amp; expert frontend dev (you), Zain — databases &amp; backend dev, Lareb — web designer &amp; project manager. We deliver UI-first, performant web apps for local businesses.</p>
+
+          <div class="hero-cta">
+            <a class="btn" href="#contact">Start a project</a>
+            <a class="btn-ghost" href="#work">See our work</a>
+          </div>
+
+          <div style="margin-top:18px;display:flex;gap:10px;color:var(--muted)">
+            <div>🚀 Fast delivery</div>
+            <div>💼 End-to-end</div>
+            <div>🔒 Secure backend</div>
+          </div>
+        </div>
+
+        <aside class="card float">
+          <div style="font-size:13px;color:var(--muted);margin-bottom:8px">Featured Project</div>
+          <div style="font-weight:700;font-size:16px;margin-bottom:10px">Khan Pizza — Online ordering platform</div>
+          <div style="color:var(--muted);font-size:13px;margin-bottom:12px">Frontend by: You · Backend &amp; DB: Zain · Design &amp; PM: Lareb</div>
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <div style="flex:1;background:linear-gradient(90deg,#0b1220,#071726);padding:10px;border-radius:8px;text-align:center;font-weight:700">Live Demo</div>
+            <div style="flex:1;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:10px;border-radius:8px;text-align:center;font-weight:700;color:#022">Case Study</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="services" class="services reveal" style="animation-delay:.12s">
+        <div class="service">
+          <h4>UI / Frontend</h4>
+          <p>Modern responsive interfaces using HTML, CSS (Flex / Grid), and optimized asset pipelines.</p>
+        </div>
+        <div class="service">
+          <h4>Backend &amp; Data</h4>
+          <p>Server-side architecture, reliable databases, and secure APIs — Zain leads this area.</p>
+        </div>
+        <div class="service">
+          <h4>Design &amp; PM</h4>
+          <p>From Figma to production-ready UI and sprint-managed delivery led by Lareb.</p>
+      </section>
+
+      <section id="work" class="reveal" style="animation-delay:.18s">
+        <h3 style="margin-bottom:12px">Recent work</h3>
+        <div class="portfolio">
+          <div class="proj">
+            <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="project 1">
+            <span class="proj-badge">Khan Pizza</span>
+          </div>
+          <div class="proj">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="project 2">
+            <span class="proj-badge">Gym Website</span>
+          </div>
+          <div class="proj">
+            <img src="https://images.unsplash.com/photo-1509395176047-4a66953fd231?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="project 3">
+            <span class="proj-badge">LPG Agency</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="team" class="reveal" style="animation-delay:.22s">
+        <h3 style="margin-bottom:12px">Team</h3>
+        <div class="team">
+          <!-- You: leader & front-end expert -->
+          <div class="member">
+            <div class="avatar">You</div>
+            <div style="font-weight:700">Leader — Frontend Expert</div>
+            <div class="role">HTML · CSS · JS · Performance</div>
+          </div>
+
+          <!-- Zain: databases & back-end dev -->
+          <div class="member">
+            <div class="avatar">Z</div>
+            <div style="font-weight:700">Zain — Databases & Back-end</div>
+            <div class="role">APIs · SQL/NoSQL · Security</div>
+          </div>
+
+          <!-- Lareb: web designer & PM -->
+          <div class="member">
+            <div class="avatar">L</div>
+            <div style="font-weight:700">Lareb — Web Designer & PM</div>
+            <div class="role">Figma · UX · Project Management</div>
+          </div>
+
+          <!-- Agency role card -->
+          <div class="member">
+            <div class="avatar">T</div>
+            <div style="font-weight:700">Typhoon Agency</div>
+            <div class="role">End-to-end Web Solutions</div>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="reveal" style="animation-delay:.26s">
+        <h3 style="margin-bottom:12px">Contact</h3>
+        <div class="contact">
+          <form style="display:flex;flex-direction:column;gap:12px" onsubmit="event.preventDefault();alert('Demo: form submission blocked — replace with real endpoint');">
+            <div style="display:flex;gap:10px;flex-wrap:wrap">
+              <input placeholder="Your name" style="flex:1;min-width:180px" />
+              <input placeholder="Email or phone" style="flex:1;min-width:180px" />
+            </div>
+            <input placeholder="Project title" />
+            <textarea placeholder="Describe your project / budget / timeline"></textarea>
+            <div style="display:flex;gap:10px;justify-content:flex-end">
+              <button class="btn" type="submit">Send message</button>
+              <button class="btn-ghost" type="button" onclick="copyEmail()">Copy email</button>
+            </div>
+          </form>
+
+          <aside style="background:var(--card);padding:14px;border-radius:12px;display:flex;flex-direction:column;gap:10px;justify-content:center;">
+            <div style="font-weight:700">Get in touch</div>
+            <div style="color:var(--muted)">Email: hello@typhoon.example</div>
+            <div style="color:var(--muted)">Phone: +92 300 0000000</div>
+            <div style="color:var(--muted)">Location: Pakistan</div>
+            <div style="margin-top:6px">
+              <a class="btn-ghost" href="#">LinkedIn</a>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Built with ❤️ by Typhoon Agency • All rights reserved
+    </footer>
+  </div>
+
+  <script>
+    // small helper to copy demo email
+    function copyEmail(){
+      navigator.clipboard?.writeText('hello@typhoon.example').then(()=>alert('Email copied to clipboard'))
+    }
+
+    // Simple reveal on scroll for small projects
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('shown') })
+    },{threshold:0.12});
+    reveals.forEach(r=>obs.observe(r));
+  </script>
+</body>
+</html>
